@@ -1,0 +1,3 @@
+CREATE TABLE(
+    student_id INT AUTO INCREMENT PRIMARY KEY,
+)
