@@ -5,4 +5,5 @@ CREATE TABLE students (
     student_course VARCHAR(50) NOT NULL,
 );
 
+
  
