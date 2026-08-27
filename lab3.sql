@@ -17,10 +17,36 @@ CREATE TABLE borrow (
 );
 
 SELECT br.borrow_id, s.student_id,
-    CONCAT(s.student_first_name, ' ', s.student_last_name) AS student_name, s.student_course,
+    CONCAT(s.student_first_name, ' ', s.student_last_name) AS student_name,
     b.book_title, b.book_author, b.book_category,
     br.borrow_date
 FROM borrow br
     JOIN students s ON br.student_id = s.student_id
-    JOIN books b ON br.book_id = s.student_id
+    JOIN books b ON br.book_id = b.book_id
+WHERE br.borrow_return_date IS NULL
+ORDER BY br.borrow_date DESC;
+
+--Alter the borrow_return_date column to allow NULL values
+ALTER TABLE borrow
+MODIFY borrow_return_date TIMESTAMP NULL DEFAULT NULL;
+
+UPDATE borrow
+SET borrow_return_date = NULL
+WHERE borrow_return_date = '2026-08-25 08:18:51';
+
+--Return a book by updating the borrow_return_date column with the current timestamp
+
+UPDATE borrow
+SET borrow_return_date = CURRENT_TIMESTAMP
+--Change value of borrow_id to the ID of the book being returned
+WHERE borrow_id = 1; AND borrow_return_date IS NULL;
+
+SELECT br.borrow_id, s.student_id,
+    Concat(s.student_first_name, ' ', s.student_last_name) AS student_name, s.student_course,
+    b.book_title, b.book_author, b.book_category,
+    br.borrow_date
+FROM borrow br
+    JOIN students s ON br.student_id = s.student_id
+    JOIN books b ON br.book_id = b.book_id
+WHERE br.borrow_return_date IS NOT NULL
 ORDER BY br.borrow_date DESC;
