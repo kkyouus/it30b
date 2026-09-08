@@ -73,15 +73,30 @@ DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_general_ci;
 
 -- Insert statement #1: Insert Students
-INSERT INTO tblname(
+INSERT INTO tblname (
     student_first_name,
     student_last_name,
     student_course
 ) VALUES
 ('KARL JOHNREY','ANDO','BSIT'),
 ('JUAN','DELA CRUZ','BSBA'),
-('CARDO','DALISAY','BS-CRIM'),
-('Harry Potter and the Sorcerers Stone','J.K. Rowling','BSED');
+('CARDO','DALISAY','BS-CRIM');
 
 -- Insert statement #2: Insert Book
+INSERT INTO books (
+    book_title,
+    book_author,
+    book_category
+) VALUES
+('Jurassic Park','Michael Crichton','Science Fiction'),
+('Lord of the Rings','JRR Tolkien','Fantasy'),
+('Harry Potter and the Sorcerers Stone','J.K. Rowling','Fantasy');
+
 -- Insert statement #3: Insert Borrow
+INSERT INTO borrow (
+    student_id,
+    book_id
+) VALUES
+(1, 1),
+(2, 2),
+(3, 3);
