@@ -31,7 +31,6 @@ $section = $_GET['section'] ?? 'students';
 $action = $_GET['action'] ?? '';
 
 
-// STUDENTS
 
 // Fetch Students
 if ($section === 'students') {
@@ -132,24 +131,6 @@ if ($section === 'students' && $action === 'update') {
 }
 
 
-// Delete Student
-if ($section === 'students' && $action === 'delete') {
-
-    $studentId = (int) ($_GET['id'] ?? 0);
-
-    $stmt = $pdo->prepare("
-        DELETE FROM students
-        WHERE student_id = ?
-    ");
-
-    $stmt->execute([$studentId]);
-
-    header("Location: index.php?section=students");
-    exit;
-}
-
-
-// BOOKS
 
 // Fetch Books
 if ($section === 'books') {
@@ -249,23 +230,6 @@ if ($section === 'books' && $action === 'update') {
     }
 }
 
-
-// Delete Book
-if ($section === 'books' && $action === 'delete') {
-
-    $bookId = (int) ($_GET['id'] ?? 0);
-
-    $stmt = $pdo->prepare("
-        DELETE FROM books
-        WHERE book_id = ?
-    ");
-
-    $stmt->execute([$bookId]);
-
-    header("Location: index.php?section=books");
-    exit;
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -289,7 +253,6 @@ if ($section === 'books' && $action === 'delete') {
     <hr>
 
 
-    <!-- STUDENTS SECTION -->
 
     <?php if ($section === 'students'): ?>
 
@@ -454,10 +417,7 @@ if ($section === 'books' && $action === 'delete') {
 
                                 |
 
-                                <a
-                                    href="index.php?section=students&action=delete&id=<?= $student['student_id'] ?>"
-                                    onclick="return confirm('Are you sure you want to delete this student?');"
-                                >
+                                <a href="#">
                                     Delete
                                 </a>
 
@@ -476,7 +436,6 @@ if ($section === 'books' && $action === 'delete') {
     <?php endif; ?>
 
 
-    <!-- BOOKS SECTION -->
 
     <?php if ($section === 'books'): ?>
 
@@ -641,10 +600,7 @@ if ($section === 'books' && $action === 'delete') {
 
                                 |
 
-                                <a
-                                    href="index.php?section=books&action=delete&id=<?= $book['book_id'] ?>"
-                                    onclick="return confirm('Are you sure you want to delete this book?');"
-                                >
+                                <a href="#">
                                     Delete
                                 </a>
 
@@ -663,15 +619,10 @@ if ($section === 'books' && $action === 'delete') {
     <?php endif; ?>
 
 
-    <!-- BORROW SECTION -->
-
     <?php if ($section === 'borrow'): ?>
 
         <h1>Borrow</h1>
 
     <?php endif; ?>
-
-
 </body>
-
 </html>
