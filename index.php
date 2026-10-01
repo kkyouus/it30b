@@ -235,11 +235,10 @@ if($section=='borrow'){
     //Retrieve students
     $stmt = $pdo->prepare("
         SELECT
-            student_id,
             student_first_name,
-            stduent_last_name
+            student_last_name
         FROM students
-        ORDER BY student_last_name, stduent_first_name
+        ORDER BY student_last_name, student_first_name
     ");
 
     $students = $stmt->fetchAll();
@@ -300,7 +299,7 @@ if($section==='borrow' && $action==='create'){
                 $bookBorrow = $stmt->fetch();
 
                 if($bookBorrow){
-                    $_SESSION('alert') = 'This book cannot be borrowed because it has not been returned.';
+                    $_SESSION['alert'] = 'This book cannot be borrowed because it has not been returned.';
                 }else {
                     //CREATE BORROW RECORD FINALLY!
                     $stmt = $pdo->prepare["
@@ -721,11 +720,25 @@ if($section==='borrow' && $action==='create'){
 
         <h1>Borrow</h1>
 
+        <p>
+            <a href="index.php?section=borrow&action=create">
+                Borrow a Book
+            </a>
+        </p>
+
+        <?php if ($action == 'create'): ?>
+            <h2> Borrow a Book </h2>
+
+            <form method='POST'>
+        </form>
+
+            <?php endif; ?>
+
     <?php endif; ?>
 
 </body>
 
-<?php if(isset($_SESSION[alert])): ?>
+<?php if(isset($_SESSION['alert'])): ?>
 
     <script>
         alert(<?= json_encode($_SESSION['alert']) ?> );
@@ -733,6 +746,6 @@ if($section==='borrow' && $action==='create'){
 
     <?php unset ($_SESSION[alert]); ?>
 
-<?php endif:?>
+<?php endif;?>
 
 </html>
