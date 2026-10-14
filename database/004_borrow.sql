@@ -13,24 +13,19 @@ SELECT
 
     br.borrow_date
 
-FROM borrows br
-
+FROM borrow br
 
 INNER JOIN students s
     ON br.student_id = s.student_id
 
-
 INNER JOIN books b
     ON br.book_id = b.book_id
 
-
 WHERE br.borrow_return_date IS NULL
-
 
 ORDER BY br.borrow_date DESC;
 
-
-UPDATE borrows
+UPDATE borrow
 SET borrow_return_date = CURRENT_TIMESTAMP
 WHERE borrow_id = 4
 AND borrow_return_date IS NULL;
