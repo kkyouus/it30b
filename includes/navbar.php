@@ -1,7 +1,10 @@
+
 <?php
+
 $currentSection = $_GET['section'] ?? 'dashboard';
 
-function navActive($section){
+function navActive($section)
+{
     return $section === $GLOBALS['currentSection'] ? 'active' : '';
 }
 
@@ -69,7 +72,10 @@ function navActive($section){
 
     .nav-links a.active {
         color: #1976d2;
-        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+        box-shadow:
+            0 2px 2px 0 rgba(0,0,0,0.14),
+            0 3px 1px -2px rgba(0,0,0,0.12),
+            0 1px 5px 0 rgba(0,0,0,0.2);
     }
 
     @media (max-width: 760px) {
@@ -93,12 +99,14 @@ function navActive($section){
 </style>
 
 <header class="app-header">
+
     <h1>
         <span class="material-icons">local_library</span>
         Library Dashboard
     </h1>
 
     <nav class="nav-links">
+
         <a href="dashboard.php" class="<?= navActive('dashboard') ?>">
             <span class="material-icons">dashboard</span>
             Dashboard
@@ -118,5 +126,7 @@ function navActive($section){
             <span class="material-icons">swap_horiz</span>
             Borrow
         </a>
+
     </nav>
+
 </header>
