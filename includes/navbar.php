@@ -4,6 +4,7 @@ $currentSection = $_GET['section'] ?? 'dashboard';
 function navActive($section){
     return $section === $GLOBALS['currentSection'] ? 'active' : '';
 }
+
 ?>
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
