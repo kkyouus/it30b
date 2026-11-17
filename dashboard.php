@@ -1,10 +1,10 @@
-
 <?php
 
-$host = 'localhost';
-$db   = 'it30b_lab_db';
-$user = 'root';
-$pass = '';
+// ---------- DATABASE CONNECTION ----------
+$host    = 'localhost';
+$db      = 'it30b_lab_db';
+$user    = 'root';
+$pass    = '';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -35,7 +35,7 @@ $catStmt = $pdo->query("
     ORDER BY cnt DESC
 ");
 
-$categories = [];
+$categories     = [];
 $categoryCounts = [];
 
 while ($row = $catStmt->fetch()) {
@@ -58,7 +58,7 @@ while ($row = $catStmt->fetch()) {
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
         /* Materialize Base Typography */
         body {
             background: #f5f5f5; /* Material Grey 100 */
@@ -69,22 +69,22 @@ while ($row = $catStmt->fetch()) {
             flex-direction: column;
             align-items: center;
         }
-        
+
         .dashboard { max-width: 1300px; width: 100%; }
 
         /* Materialize Standard Card */
         .stat-card, .chart-card, .recent-borrows {
             background: #ffffff;
             border-radius: 2px;
-            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 
-                        0 3px 1px -2px rgba(0,0,0,0.12), 
+            box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),
+                        0 3px 1px -2px rgba(0,0,0,0.12),
                         0 1px 5px 0 rgba(0,0,0,0.2);
             transition: box-shadow 0.3s;
         }
 
         .stat-card:hover, .chart-card:hover, .recent-borrows:hover {
-            box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 
-                        0 1px 10px 0 rgba(0,0,0,0.12), 
+            box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14),
+                        0 1px 10px 0 rgba(0,0,0,0.12),
                         0 2px 4px -1px rgba(0,0,0,0.3);
         }
 
@@ -127,17 +127,17 @@ while ($row = $catStmt->fetch()) {
             color: #bdbdbd; /* Material Grey 400 */
         }
 
-        .stat-number { 
-            font-size: 2.5rem; 
-            font-weight: 400; 
-            color: #212121; 
-            line-height: 1.2; 
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #212121;
+            line-height: 1.2;
         }
 
-        .stat-sub { 
-            font-size: 0.85rem; 
-            color: #9e9e9e; 
-            margin-top: 0.3rem; 
+        .stat-sub {
+            font-size: 0.85rem;
+            color: #9e9e9e;
+            margin-top: 0.3rem;
         }
 
         /* ---- CHARTS ---- */
@@ -178,11 +178,11 @@ while ($row = $catStmt->fetch()) {
             font-size: 1rem;
         }
 
-        canvas { 
-            display: block; 
-            width: 100% !important; 
-            height: auto !important; 
-            max-height: 200px; 
+        canvas {
+            display: block;
+            width: 100% !important;
+            height: auto !important;
+            max-height: 200px;
         }
 
         /* ---- RECENT BORROWS ---- */
@@ -241,7 +241,7 @@ while ($row = $catStmt->fetch()) {
         }
 
         .borrow-row:last-child { border-bottom: none; }
-        
+
         .borrow-student {
             font-weight: 500;
             color: #424242;
@@ -285,12 +285,12 @@ while ($row = $catStmt->fetch()) {
             font-size: 0.9rem;
         }
 
-        .borrow-status.returned { 
+        .borrow-status.returned {
             background: #e8f5e9; /* Green 50 */
             color: #2e7d32;      /* Green 800 */
         }
 
-        .borrow-status.borrowed { 
+        .borrow-status.borrowed {
             background: #fff3e0; /* Orange 50 */
             color: #ef6c00;      /* Orange 800 */
         }
@@ -317,7 +317,7 @@ while ($row = $catStmt->fetch()) {
 
 <body>
 
-    <?php include 'includes/navbar.php' ?>
+    <?php include 'includes/navbar.php'; ?>
 
     <div class="dashboard">
 
@@ -365,7 +365,7 @@ while ($row = $catStmt->fetch()) {
         <!-- CHARTS -->
         <div class="charts-grid">
 
-            <!-- Pie Chart - Book Categories-->
+            <!-- Doughnut Chart - Book Categories -->
             <div class="chart-card">
                 <div class="chart-title">
                     Books by category
@@ -422,7 +422,7 @@ while ($row = $catStmt->fetch()) {
                             labels: {
                                 boxWidth: 12,
                                 boxHeight: 12,
-                                usePointStyle: false, // Materialize usually uses squares
+                                usePointStyle: false,
                                 padding: 16,
                                 font: { size: 12, family: 'Roboto' },
                                 color: '#616161'
@@ -442,7 +442,7 @@ while ($row = $catStmt->fetch()) {
                                     const total = context.dataset.data.reduce((a, b) => a + b, 0);
                                     const pct = total > 0 ? ((value / total) * 100).toFixed(0) : 0;
 
-                                    return ` ${label}: ${value} (${pct}%)`;
+                                    return ${label}: ${value} (${pct}%);
                                 }
                             }
                         }
