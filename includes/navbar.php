@@ -1,15 +1,13 @@
-
 <?php
-
 $currentSection = $_GET['section'] ?? 'dashboard';
 
-function navActive($section)
+function navActive($section, $currentSection)
 {
-    return $section === $GLOBALS['currentSection'] ? 'active' : '';
+    return $section === $currentSection ? 'active' : '';
 }
-
 ?>
 
+<!-- Material Icon -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <style>
@@ -17,11 +15,9 @@ function navActive($section)
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 2rem;
         flex-wrap: wrap;
         gap: 1rem;
-        width: 100%;
-        max-width: 1300px;
         font-family: Roboto, system-ui, -apple-system, sans-serif;
     }
 
@@ -31,19 +27,19 @@ function navActive($section)
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        color: #212121;
-        margin: 0;
+        color: #212121 margin:0;
     }
 
     .app-header h1 .material-icons {
         font-size: 2.2rem;
         color: #1976d2;
+        /* Primary Blue */
     }
 
     .nav-links {
         display: flex;
         gap: 0.25rem;
-        background-color: transparent;
+        background: transparent;
     }
 
     .nav-links a {
@@ -52,7 +48,7 @@ function navActive($section)
         font-size: 0.9rem;
         font-weight: 500;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.5px;
         padding: 0.6rem 1.2rem;
         border-radius: 4px;
         transition: background-color 0.2s, color 0.2s;
@@ -61,24 +57,26 @@ function navActive($section)
         gap: 0.35rem;
     }
 
-    .nav-links a .material-icons {
+    .nav-links a .material-icon {
         font-size: 1.2rem;
     }
 
+
     .nav-links a:hover {
-        background-color: #e3f2fd;
+        background: #e3f2fd;
         color: #1976d2;
     }
 
     .nav-links a.active {
         color: #1976d2;
-        box-shadow:
-            0 2px 2px 0 rgba(0,0,0,0.14),
-            0 3px 1px -2px rgba(0,0,0,0.12),
-            0 1px 5px 0 rgba(0,0,0,0.2);
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
     }
 
-    @media (max-width: 760px) {
+    .nav-links a.active .material-icons {
+        color: #1976d2;
+    }
+
+    @media (max-width:760px) {
         .app-header {
             flex-direction: column;
             align-items: flex-start;
@@ -92,58 +90,58 @@ function navActive($section)
 
         .nav-links a {
             padding: 0.5rem 0.8rem;
-            font-size: 0.8rem;
+            font-size: .8rem;
             white-space: nowrap;
         }
     }
+    
 </style>
 
 <header class="app-header">
-
     <h1>
         <span class="material-icons">local_library</span>
         Library Dashboard
     </h1>
 
     <nav class="nav-links">
-
-        <a href="dashboard.php" class="<?= navActive('dashboard') ?>">
+        <a href="index.php?section=dashboard" class="<?= navActive('dashboard', $currentSection) ?>">
             <span class="material-icons">dashboard</span>
             Dashboard
-        </a>
+            <a />
 
-        <a href="index.php?section=students" class="<?= navActive('students') ?>">
-            <span class="material-icons">people</span>
-            Students
-        </a>
+            <a href="index.php?section=students" class="<?= navActive('students', $currentSection) ?>">
+                <span class="material-icons">people</span>
+                Students
+                <a />
 
-        <a href="index.php?section=books" class="<?= navActive('books') ?>">
-            <span class="material-icons">menu_book</span>
-            Books
-        </a>
+                <a href="index.php?section=books" class="<?= navActive('books', $currentSection) ?>">
+                    <span class="material-icons">menu_book</span>
+                    Books
+                    <a />
 
-        <a href="index.php?section=borrow" class="<?= navActive('borrow') ?>">
-            <span class="material-icons">swap_horiz</span>
-            Borrow
-        </a>
-
+                    <a href="index.php?section=borrow" class="<?= navActive('borrow', $currentSection) ?>">
+                        <span class="material-icons">swap_horiz</span>
+                        Borrow
+                        <a />
     </nav>
 
-</header>
+    <header />
 
-<style>
 
+    <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-
+        /* Materialize Base Typography */
         body {
             background: #f5f5f5;
+            /* Material Grey 100 */
             font-family: Roboto, system-ui, -apple-system, sans-serif;
             color: #212121;
+            /* Material Grey 900 */
             padding: 2rem 1.5rem;
             display: flex;
             flex-direction: column;
@@ -155,30 +153,27 @@ function navActive($section)
             width: 100%;
         }
 
-
+        /* Materialize Standard Card */
         .stat-card,
         .chart-card,
         .recent-borrows {
             background: #ffffff;
             border-radius: 2px;
-            box-shadow:
-                0 2px 2px 0 rgba(0,0,0,0.14),
-                0 3px 1px -2px rgba(0,0,0,0.12),
-                0 1px 5px 0 rgba(0,0,0,0.2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+                0 3px 1px -2px rgba(0, 0, 0, 0.12),
+                0 1px 5px 0 rgba(0, 0, 0, 0.2);
             transition: box-shadow 0.3s;
         }
 
         .stat-card:hover,
         .chart-card:hover,
         .recent-borrows:hover {
-            box-shadow:
-                0 4px 5px 0 rgba(0,0,0,0.14),
-                0 1px 10px 0 rgba(0,0,0,0.12),
-                0 2px 4px -1px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+                0 1px 10px 0 rgba(0, 0, 0, 0.12),
+                0 2px 4px -1px rgba(0, 0, 0, 0.3);
         }
 
-
-
+        /* ---- KPI CARDS ---- */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -191,19 +186,24 @@ function navActive($section)
             display: flex;
             flex-direction: column;
             border-top: 3px solid #1976d2;
+            /* Material Blue Accent */
         }
 
         .stat-card:nth-child(2) {
             border-top-color: #4caf50;
         }
 
+        /* Green */
         .stat-card:nth-child(3) {
             border-top-color: #ff9800;
         }
 
+        /* Orange */
         .stat-card:nth-child(4) {
             border-top-color: #f44336;
         }
+
+        /* Red */
 
         .stat-header {
             display: flex;
@@ -218,11 +218,13 @@ function navActive($section)
             letter-spacing: 0.05em;
             font-weight: 500;
             color: #757575;
+            /* Material Grey 600 */
         }
 
         .stat-header .material-icons {
             font-size: 1.8rem;
             color: #bdbdbd;
+            /* Material Grey 400 */
         }
 
         .stat-number {
@@ -238,9 +240,7 @@ function navActive($section)
             margin-top: 0.3rem;
         }
 
-
-
-
+        /* ---- CHARTS ---- */
         .charts-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -285,8 +285,7 @@ function navActive($section)
             max-height: 200px;
         }
 
-
-
+        /* ---- RECENT BORROWS ---- */
         .recent-borrows {
             padding: 1.5rem;
         }
@@ -371,10 +370,12 @@ function navActive($section)
             color: #9e9e9e;
         }
 
+        /* Material Design Chips */
         .borrow-status {
             font-size: 0.75rem;
             padding: 0.3rem 0.8rem;
             border-radius: 16px;
+            /* Chip border radius */
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -389,12 +390,16 @@ function navActive($section)
 
         .borrow-status.returned {
             background: #e8f5e9;
+            /* Green 50 */
             color: #2e7d32;
+            /* Green 800 */
         }
 
         .borrow-status.borrowed {
             background: #fff3e0;
+            /* Orange 50 */
             color: #ef6c00;
+            /* Orange 800 */
         }
 
         .footer-note {
@@ -405,10 +410,7 @@ function navActive($section)
             letter-spacing: 0.5px;
         }
 
-
-
         @media (max-width: 760px) {
-
             .charts-grid {
                 grid-template-columns: 1fr;
             }
@@ -428,5 +430,4 @@ function navActive($section)
                 gap: 0.5rem;
             }
         }
-
     </style>
